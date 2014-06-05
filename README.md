@@ -1,5 +1,4 @@
 # bxLiveTemplates4Eclipse
-=======================
 
 Bitrix live templates for [Eclipse](http://www.eclipse.org/)
 
