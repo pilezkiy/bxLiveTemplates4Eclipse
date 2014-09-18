@@ -46,7 +46,7 @@ $$arFileTmp = CFile::ResizeImageGet($$fid,array("width" =&gt; ${width}, "height"
 if(!empty($$arFileTmp["src"]))&#13;
 {&#13;
 	${cursor}&#13;
-}</template><template autoinsert="true" context="php" deleted="false" description="php_interface include file" enabled="true" name="bx::incfile">$$incFile = dirname(__FILE__)."/${filename}.php"; if(file_exists($$incFile)) require_once($$incFile);</template><template autoinsert="true" context="php" deleted="false" description="CModule::IncludeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">CModule::IncludeModule("iblock${cursor}");</template><template autoinsert="true" context="php" deleted="false" description="Склонение числительных" enabled="true" name="bx::pluralForm">$$pluralForm = function($$n, $$form1, $$form2, $$form5)&#13;
+}</template><template autoinsert="true" context="php" deleted="false" description="php_interface include file" enabled="true" name="bx::incfile">$$incFile = __DIR__."/${filename}.php"; if(file_exists($$incFile)) require_once($$incFile);</template><template autoinsert="true" context="php" deleted="false" description="CModule::IncludeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">CModule::IncludeModule("iblock${cursor}");</template><template autoinsert="true" context="php" deleted="false" description="Склонение числительных" enabled="true" name="bx::pluralForm">$$pluralForm = function($$n, $$form1, $$form2, $$form5)&#13;
 {&#13;
 	$$n = abs($$n) % 100;&#13;
 	$$n1 = $$n % 10;&#13;
