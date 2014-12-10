@@ -56,7 +56,7 @@ if(!empty($$arFileTmp["src"]))&#13;
 	return $$form5;&#13;
 };&#13;
 // $$pluralForm(10,"товар","товара","товаров");</template><template autoinsert="true" context="php" deleted="false" description="SITE_TEMPLATE_PATH" enabled="true" name="bx::SITE_TEMPLATE_PATH">&lt;?=SITE_TEMPLATE_PATH?&gt;</template><template autoinsert="true" context="php" deleted="false" description="SetResultCacheKeys()" enabled="true" name="bx::tpl.cachekeys">$$this-&gt;__component-&gt;SetResultCacheKeys(array(${cursor}));</template><template autoinsert="true" context="php" deleted="false" description="news.list template" enabled="true" name="bx::tpl.newslist">&lt;?&#13;
-if ($$arResult["ITEMS"]):&#13;
+if ($$arResult["ITEMS"])&#13;
 {&#13;
 	if($$arParams["DISPLAY_TOP_PAGER"]) echo $$arResult["NAV_STRING"];&#13;
 	foreach ($$arResult["ITEMS"] as $$arItem)&#13;
