@@ -88,8 +88,8 @@ if(!empty($$arFileTmp["src"]))&#13;
 </template>
 <template autoinsert="true" context="php" deleted="false" description="php_interface include file" enabled="true" name="bx::incfile">$$incFile = __DIR__."/${filename}.php"; if(file_exists($$incFile)) require_once($$incFile);
 </template>
-<template autoinsert="true" context="php" deleted="false" description="CModule::IncludeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">CModule::IncludeModule("iblock${cursor}");
-</template>
+<template autoinsert="true" context="php" deleted="false" description="\Bitrix\Main\Loader::includeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">\Bitrix\Main\Loader::includeModule("iblock${cursor}");</template>
+<template autoinsert="true" context="php" deleted="false" description="use \Bitrix\Main\Localization\Loc;" enabled="true" name="bx::loc">use \Bitrix\Main\Localization\Loc;</template>
 <template autoinsert="true" context="php" deleted="false" description="Склонение числительных" enabled="true" name="bx::pluralForm">$$pluralForm = function($$n, $$form1, $$form2, $$form5)&#13;
 {&#13;
 	$$n = abs($$n) % 100;&#13;
