@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <templates>
-<template autoinsert="true" context="php" deleted="false" description="$APPLICATION-&gt;SetAdditionalCSS()" enabled="true" name="bx::addcss">$$APPLICATION-&gt;SetAdditionalCSS(SITE_TEMPLATE_PATH . "${path_to_file}");
+<template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addCss()" enabled="true" name="bx::addcss">$$asset = \Bitrix\Main\Page\Asset::getInstance();
+$$asset-&gt;addCss(SITE_TEMPLATE_PATH . '${path_to_file}');
 </template>
-<template autoinsert="true" context="php" deleted="false" description="$APPLICATION-&gt;AddHeadScript()" enabled="true" name="bx::addjs">$$APPLICATION-&gt;AddHeadScript(SITE_TEMPLATE_PATH . "${path_to_file}");
+<template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addJs()" enabled="true" name="bx::addjs">$$asset = \Bitrix\Main\Page\Asset::getInstance();
+$$asset-&gt;addJs(SITE_TEMPLATE_PATH . '${path_to_file}');
 </template>
 <template autoinsert="true" context="php" deleted="false" description="AJAX page simple" enabled="true" name="bx::ajaxpage">require_once($$_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");&#13;
 ${cursor}&#13;
@@ -33,7 +35,8 @@ if($$obCache-&gt;StartDataCache()) $$obCache-&gt;EndDataCache(array("VALUE_FROM_
 </template>
 <template autoinsert="true" context="php" deleted="false" description="$APPLICATION-&gt;GetCurPageParam();" enabled="true" name="bx::getcurpageparam">$$APPLICATION-&gt;GetCurPageParam("${param}=${param_value}",array("${delete_param1}","${delete_param2}"));
 </template>
-<template autoinsert="true" context="php" deleted="false" description="AddEventHandler(...) - регистрация обработчика события" enabled="true" name="bx::handler">AddEventHandler("${module}", "${event_name}",    array("${class_name}", "${function_name}"));
+<template autoinsert="true" context="php" deleted="false" description="$eventManager-&gt;addEventHandler(...) - регистрация обработчика события" enabled="true" name="bx::handler">$$eventManager = \Bitrix\Main\EventManager::getInstance();
+$$eventManager-&gt;addEventHandler('${module}', '${event_name}', array('${class_name}','${function_name}'));
 </template>
 <template autoinsert="true" context="php" deleted="false" description="Highloadblock добавление записи" enabled="true" name="bx::hl.add">$$hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(${HL_ID})-&gt;fetch();&#13;
 $$entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($$hlblock);&#13;
