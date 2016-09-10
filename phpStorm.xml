@@ -1,0 +1,149 @@
+<templateSet group="yetiBitrixLiveTemplates">
+  <template name="bx::addcss" value="$asset = \Bitrix\Main\Page\Asset::getInstance();&#10;$asset-&gt;addCss(SITE_TEMPLATE_PATH . '$path_to_file$');" description="$asset-&gt;addCss()" toReformat="false" toShortenFQNames="true">
+    <variable name="path_to_file" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::addjs" value="$asset = \Bitrix\Main\Page\Asset::getInstance();&#10;$asset-&gt;addJs(SITE_TEMPLATE_PATH . '$path_to_file$');" description="$asset-&gt;addJs()" toReformat="false" toShortenFQNames="true">
+    <variable name="path_to_file" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::app" value="$APPLICATION $END$" description="$APPLICATION" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::cache" value="$сache = Bitrix\Main\Data\Cache::createInstance();&#10;$cacheTime = 86400; &#10;$cacheId = '$cache_id$';&#10;$cacheDir = '/$cache_dir$';&#10;if ($сache-&gt;initCache($cacheTime, $cacheId, $cacheDir)) &#10;{&#10;&#9;$var_name$ = $сache-&gt;getVars(); &#10;}&#10;elseif ($сache-&gt;startDataCache()) &#10;{ &#10;&#9;$var_name$ = array(); &#10;&#9;if ($isInvalid) &#10;&#9;{&#10;&#9;&#9;$cache-&gt;abortDataCache(); &#10;&#9;}&#10;&#9;$сache-&gt;endDataCache($var_name$); &#10;}" description="Cache" toReformat="true" toShortenFQNames="true">
+    <variable name="cache_id" expression="" defaultValue="&quot;unique_cache_id&quot;" alwaysStopAt="true" />
+    <variable name="cache_dir" expression="" defaultValue="&quot;cache_dir/&quot;" alwaysStopAt="true" />
+    <variable name="var_name" expression="phpVar" defaultValue="&quot;$result&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::comp.main.include by filepath" value="$APPLICATION-&gt;IncludeComponent(&quot;bitrix:main.include&quot;, &quot;&quot;, array(&quot;AREA_FILE_SHOW&quot; =&gt; &quot;file&quot;, &quot;PATH&quot; =&gt; SITE_TEMPLATE_PATH.&quot;$path$&quot;), false);" description="Insert component bitrix:main.include :: include file by path" toReformat="false" toShortenFQNames="true">
+    <variable name="path" expression="" defaultValue="&quot;/includes/filename.php&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::optget" value="$var_name$ = Bitrix\Main\Config\Option::get('$module_id$','$option_name$');" description="Bitrix\Main\Config\Option::get" toReformat="true" toShortenFQNames="true">
+    <variable name="var_name" expression="phpVar" defaultValue="&quot;$option&quot;" alwaysStopAt="true" />
+    <variable name="module_id" expression="lowercaseAndDash(String)" defaultValue="&quot;main&quot;" alwaysStopAt="true" />
+    <variable name="option_name" expression="" defaultValue="&quot;option_name&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::optset" value="$var_name$ = Bitrix\Main\Config\Option::set('$module_id$','$option_name$','$value$');" description="Bitrix\Main\Config\Option::set" toReformat="true" toShortenFQNames="true">
+    <variable name="var_name" expression="phpVar" defaultValue="&quot;$option&quot;" alwaysStopAt="true" />
+    <variable name="module_id" expression="lowercaseAndDash(String)" defaultValue="&quot;main&quot;" alwaysStopAt="true" />
+    <variable name="option_name" expression="" defaultValue="&quot;option_name&quot;" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::getcurpageparam" value="$APPLICATION-&gt;GetCurPageParam(&quot;$param$=$param_value$&quot;,array(&quot;$delete_param1$&quot;,&quot;$delete_param2$&quot;));" description="$APPLICATION-&gt;GetCurPageParam();" toReformat="false" toShortenFQNames="true">
+    <variable name="param" expression="" defaultValue="&quot;param&quot;" alwaysStopAt="true" />
+    <variable name="param_value" expression="" defaultValue="&quot;param_value&quot;" alwaysStopAt="true" />
+    <variable name="delete_param1" expression="" defaultValue="&quot;delete_param1&quot;" alwaysStopAt="true" />
+    <variable name="delete_param2" expression="" defaultValue="&quot;delete_param2&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::handler" value="$eventManager = \Bitrix\Main\EventManager::getInstance();&#10;$eventManager-&gt;addEventHandler('$module_id$', '$event_name$', array('$class_name$','$function_name$'));" description="$eventManager-&gt;addEventHandler(...) - регистрация обработчика события" toReformat="false" toShortenFQNames="true">
+    <variable name="module_id" expression="" defaultValue="&quot;module_id&quot;" alwaysStopAt="true" />
+    <variable name="event_name" expression="" defaultValue="&quot;event_name&quot;" alwaysStopAt="true" />
+    <variable name="class_name" expression="" defaultValue="&quot;class_name&quot;" alwaysStopAt="true" />
+    <variable name="function_name" expression="" defaultValue="&quot;function_name&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::hl.add" value="$hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById($HL_ID$)-&gt;fetch();&#10;$entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);&#10;$entity_data_class = $entity-&gt;getDataClass();&#10;$result = $entity_data_class::add(array(&#10;&#9;&quot;UF_FIELD&quot; =&gt; &quot;value&quot;,&#10;));" description="Highloadblock добавление записи" toReformat="false" toShortenFQNames="true">
+    <variable name="HL_ID" expression="" defaultValue="&quot;highloadblock_id&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::ibegetbyid" value="$element = Bitrix\Iblock\ElementTable::getRowById($element_id$)" description="Bitrix\Iblock\ElementTable::getRowById" toReformat="false" toShortenFQNames="true">
+    <variable name="element_id" expression="" defaultValue="&quot;$elementID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::ibegetlist" value="$f = array(&quot;IBLOCK_ID&quot;=&gt;$IBLOCK_ID$,&quot;ACTIVE&quot;=&gt;&quot;Y&quot;,&quot;SECTION_GLOBAL_ACTIVE&quot;=&gt;&quot;Y&quot;);&#10;$s = array(&quot;ID&quot;,&quot;NAME&quot;);&#10;$rs = CIBlockElement::GetList(array(&quot;ID&quot;=&gt;&quot;ASC&quot;),$f,false,false,$s);&#10;while($o = $rs-&gt;GetNextElement())&#10;{&#10;&#9;$arItem = $o-&gt;GetFields();&#10;&#9;$arItem[&quot;PROPERTIES&quot;] = $o-&gt;GetProperties();&#10;}&#10;" description="CIBlockElement::GetList" toReformat="false" toShortenFQNames="true">
+    <variable name="IBLOCK_ID" expression="" defaultValue="&quot;$iblockID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::ibgetbyid" value="$ib = Bitrix\Iblock\IblockTable::getRowById($iblockID$);" description="Bitrix\Iblock\IblockTable::getRowById" toReformat="false" toShortenFQNames="true">
+    <variable name="iblockID" expression="" defaultValue="&quot;$iblockID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::imgresize" value="$arPhotoFilter = array(&quot;name&quot; =&gt; &quot;sharpen&quot;, &quot;precision&quot; =&gt; 30);&#10;$arFileTmp = CFile::ResizeImageGet($fid,array(&quot;width&quot; =&gt; $width$, &quot;height&quot; =&gt; $height$),BX_RESIZE_IMAGE_PROPORTIONAL,true, $arPhotoFilter);&#10;if(!empty($arFileTmp[&quot;src&quot;]))&#10;{&#10;&#9;$END$&#10;}&#10;" description="CFile::ResizeImageGet()" toReformat="false" toShortenFQNames="true">
+    <variable name="width" expression="" defaultValue="&quot;300&quot;" alwaysStopAt="true" />
+    <variable name="height" expression="" defaultValue="&quot;300&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::incfile" value="$incFile = __DIR__.&quot;/$filename$&quot;; if(file_exists($incFile)) require_once($incFile);" description="php_interface include file" toReformat="false" toShortenFQNames="true">
+    <variable name="filename" expression="" defaultValue="&quot;filename.php&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::incmod" value="\Bitrix\Main\Loader::includeModule(&quot;$module_id$&quot;);" description="\Bitrix\Main\Loader::includeModule(&quot;iblock&quot;);" toReformat="false" toShortenFQNames="true">
+    <variable name="module_id" expression="" defaultValue="&quot;iblock&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::loc" value="use \Bitrix\Main\Localization\Loc;&#10;Loc::loadMessages(__FILE__);&#10;$msg = Loc::getMessage(&quot;$message_code$&quot;);" description="\Bitrix\Main\Localization\Loc" toReformat="false" toShortenFQNames="true">
+    <variable name="message_code" expression="" defaultValue="&quot;message_code&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::page" value="require($_SERVER[&quot;DOCUMENT_ROOT&quot;].&quot;/bitrix/header.php&quot;);&#10;$APPLICATION-&gt;SetPageProperty(&quot;title&quot;, &quot;Заголовок браузера&quot;);&#10;$APPLICATION-&gt;SetPageProperty(&quot;keywords&quot;, &quot;Ключевые слова&quot;);&#10;$APPLICATION-&gt;SetPageProperty(&quot;description&quot;, &quot;Описание страницы&quot;);&#10;$APPLICATION-&gt;SetTitle(&quot;Заголовок страницы H1&quot;);&#10;&#10;require($_SERVER[&quot;DOCUMENT_ROOT&quot;].&quot;/bitrix/footer.php&quot;);&#10;" description="Simple Bitrix page" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::pluralForm" value="$pluralForm = function($n, $form1, $form2, $form5) {&#10;&#9;$n = abs($n) % 100;&#10;&#9;$n1 = $n % 10;&#10;&#9;if ($n &gt; 10 &amp;&amp; $n &lt; 20) return $form5;&#10;&#9;if ($n1 &gt; 1 &amp;&amp; $n1 &lt; 5) return $form2;&#10;&#9;if ($n1 == 1) return $form1;&#10;&#9;return $form5;&#10;};&#10;// $pluralForm(10,&quot;товар&quot;,&quot;товара&quot;,&quot;товаров&quot;);&#10;" description="Склонение числительных" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::ajaxpage" value="define(&quot;STOP_STATISTICS&quot;, true);&#10;define(&quot;NO_KEEP_STATISTIC&quot;, true);&#10;define(&quot;NO_AGENT_STATISTIC&quot;, true);&#10;define(&quot;DisableEventsCheck&quot;, true);&#10;define(&quot;BX_SECURITY_SHOW_MESSAGE&quot;, true);&#10;define(&quot;PUBLIC_AJAX_MODE&quot;, true);&#10;define(&quot;NOT_CHECK_PERMISSIONS&quot;, true);&#10;require_once($_SERVER[&quot;DOCUMENT_ROOT&quot;].&quot;/bitrix/modules/main/include/prolog_before.php&quot;);&#10;$END$&#10;require_once($_SERVER[&quot;DOCUMENT_ROOT&quot;].&quot;/bitrix/modules/main/include/epilog_after.php&quot;);" description="AJAX page simple" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::tpl.cachekeys" value="$this-&gt;__component-&gt;SetResultCacheKeys(array(&quot;$param1$&quot;,&quot;$param2$&quot;));" description="SetResultCacheKeys()" toReformat="false" toShortenFQNames="true">
+    <variable name="param1" expression="" defaultValue="&quot;param1&quot;" alwaysStopAt="true" />
+    <variable name="param2" expression="" defaultValue="&quot;param2&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::tpl.newslist" value="if ($arResult[&quot;ITEMS&quot;])&#10;{&#10;&#9;if($arParams[&quot;DISPLAY_TOP_PAGER&quot;]) echo $arResult[&quot;NAV_STRING&quot;];&#10;&#9;foreach ($arResult[&quot;ITEMS&quot;] as $arItem)&#10;&#9;{&#10;&#9;&#9;$this-&gt;AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem[&quot;IBLOCK_ID&quot;], &quot;ELEMENT_EDIT&quot;));&#10;&#9;&#9;$this-&gt;AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem[&quot;IBLOCK_ID&quot;], &quot;ELEMENT_DELETE&quot;), array(&quot;CONFIRM&quot; =&gt; GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));&#10;&#9;&#9;$id = $this-&gt;GetEditAreaId($arItem['ID']);&#10;&#9;&#9;?&gt;&#10;&#9;&#9;&lt;div id=&quot;&lt;?=$id?&gt;&quot;&gt;&#10;&#9;&#9;&#9;$END$&#10;&#9;&#9;&lt;/div&gt;&#10;&#9;&#9;&lt;?&#10;&#9;}&#10;&#9;if($arParams[&quot;DISPLAY_BOTTOM_PAGER&quot;]) echo $arResult[&quot;NAV_STRING&quot;];&#10;}&#10;" description="news.list template" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="bx::translit" value="$code = CUtil::translit($str, &quot;ru&quot;, array(&quot;max_len&quot;=&gt;100,&quot;change_case&quot;=&gt;&quot;L&quot;,&quot;replace_space&quot;=&gt;&quot;-&quot;,&quot;replace_other&quot;=&gt;&quot;-&quot;,&quot;delete_repeat_replace&quot;=&gt;true));" description="CUtil::translit()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>
