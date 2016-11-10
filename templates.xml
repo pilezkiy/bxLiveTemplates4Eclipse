@@ -145,4 +145,11 @@ $$APPLICATION-&gt;SetTitle("Заголовок страницы H1");&#13;
 &#13;
 require($$_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 </template>
+<template autoinsert="true" context="php" deleted="false" description="Composite site dynamic area" enabled="true" name="bx::compositeDynamicArea">$$dynamicArea = new \Bitrix\Main\Page\FrameStatic("${dynamic_block_id}");&#13;
+$$dynamicArea-&gt;setStub("");&#13;
+$$dynamicArea-&gt;setAnimation(true);&#13;
+// $$dynamicArea-&gt;setContainerID("${dynamic_block_id}");&#13;
+$$dynamicArea-&gt;startDynamicArea();&#13;
+// code of dynamic area&#13;
+$$dynamicArea-&gt;finishDynamicArea();</template>
 </templates>
