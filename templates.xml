@@ -1,53 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<templates>
-<template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addCss()" enabled="true" name="bx::addcss">$$asset = \Bitrix\Main\Page\Asset::getInstance();
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="phpcomment" deleted="false" description="add the user as author" enabled="true" id="org.eclipse.php.ui.editor.templates.phpdoc.author" name="author">@author ${user}
+</template><template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addCss()" enabled="true" name="bx::addcss">$$asset = \Bitrix\Main\Page\Asset::getInstance();
 $$asset-&gt;addCss(SITE_TEMPLATE_PATH . '${path_to_file}');
-</template>
-<template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addJs()" enabled="true" name="bx::addjs">$$asset = \Bitrix\Main\Page\Asset::getInstance();
+</template><template autoinsert="true" context="php" deleted="false" description="$asset-&gt;addJs()" enabled="true" name="bx::addjs">$$asset = \Bitrix\Main\Page\Asset::getInstance();
 $$asset-&gt;addJs(SITE_TEMPLATE_PATH . '${path_to_file}');
-</template>
-<template autoinsert="true" context="php" deleted="false" description="AJAX page simple" enabled="true" name="bx::ajaxpage">require_once($$_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="AJAX page simple" enabled="true" name="bx::ajaxpage">require_once($$_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");&#13;
 ${cursor}&#13;
 require_once($$_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");
-</template>
-<template autoinsert="true" context="php" deleted="false" description="$APPLICATION" enabled="true" name="bx::app">$$APPLICATION${cursor}
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CPHPCache" enabled="true" name="bx::cache">$$${new_variable} = array();&#13;
-$$obCache = new CPHPCache;&#13;
-$$life_time = 7200;&#13;
-$$cache_id = "${unique_cache_id}";&#13;
-if($$obCache-&gt;InitCache($$life_time, $$cache_id, "/"))&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="$APPLICATION" enabled="true" name="bx::app">$$APPLICATION${cursor}
+</template><template autoinsert="true" context="php" deleted="false" description="Cache" enabled="true" name="bx::cache">$$${new_variable} = [];&#13;
+$$noCache = false;&#13;
+$$cacheTime = 3600;&#13;
+$$cacheId = "cache_unique_id";&#13;
+$$cacheDir = "/";&#13;
+$$cache = \Bitrix\Main\Data\Cache::createInstance();&#13;
+if ($$noCache !== true &amp;&amp; $$cache-&gt;initCache($$cacheTime, $$cacheId, $$cacheDir))&#13;
 {&#13;
-	$$vars = $$obCache-&gt;GetVars();&#13;
-	$$${new_variable} = $$vars["VALUE_FROM_CACHE"];&#13;
+	$$${new_variable} = $$cache-&gt;getVars();&#13;
 }&#13;
 else&#13;
 {&#13;
-	$$${new_variable} = "";// get values&#13;
+	$$cache-&gt;startDataCache($$cacheTime, $$cacheId, $$cacheDir);&#13;
+	$$${new_variable} = [];&#13;
+	$$cache-&gt;endDataCache($$${new_variable});&#13;
 }&#13;
-if($$obCache-&gt;StartDataCache()) $$obCache-&gt;EndDataCache(array("VALUE_FROM_CACHE" =&gt; $$${new_variable}));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="Вставить комментарий с датой" enabled="true" name="bx::comment">// ${comment} --- ${user_name} ${date} ${time}
-</template>
-<template autoinsert="true" context="php" deleted="false" description="COption::GetOptionString()" enabled="true" name="bx::coptget">$$${optValue} = COption::GetOptionString("${module}","${OPTION_NAME}","");
-</template>
-<template autoinsert="true" context="php" deleted="false" description="COption::SetOptionString();" enabled="true" name="bx::coptset">COption::SetOptionString("${module}", "${OPTION_NAME}", "${OPTION_VALUE}");
-</template>
-<template autoinsert="true" context="php" deleted="false" description="$APPLICATION-&gt;GetCurPageParam();" enabled="true" name="bx::getcurpageparam">$$APPLICATION-&gt;GetCurPageParam("${param}=${param_value}",array("${delete_param1}","${delete_param2}"));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="$eventManager-&gt;addEventHandler(...) - регистрация обработчика события" enabled="true" name="bx::handler">$$eventManager = \Bitrix\Main\EventManager::getInstance();
+&#13;
+return $$${new_variable};</template><template autoinsert="true" context="php" deleted="false" description="Вставить комментарий с датой" enabled="true" name="bx::comment">// ${comment} --- ${user_name} ${date} ${time}
+</template><template autoinsert="true" context="php" deleted="false" description="Insert component bitrix:breadcrumb" enabled="true" name="bx::comp.breadcrumb">$$APPLICATION-&gt;IncludeComponent("bitrix:breadcrumb", ".default", array("START_FROM" =&gt; "0","PATH" =&gt; "","SITE_ID" =&gt; "-"),false);
+</template><template autoinsert="true" context="php" deleted="false" description="Insert component bitrix:main.include :: include file by path" enabled="true" name="bx::comp.main.include by filepath">$$APPLICATION-&gt;IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" =&gt; "file", "PATH" =&gt; SITE_TEMPLATE_PATH."/includes/filename.php"), false);
+</template><template autoinsert="true" context="php" deleted="false" description="Composite site dynamic area" enabled="true" name="bx::compositeDynamicArea">$$dynamicArea = new \Bitrix\Main\Page\FrameStatic("${dynamic_block_id}");&#13;
+$$dynamicArea-&gt;setStub("");&#13;
+$$dynamicArea-&gt;setAnimation(true);&#13;
+// $$dynamicArea-&gt;setContainerID("${dynamic_block_id}");&#13;
+$$dynamicArea-&gt;startDynamicArea();&#13;
+// code of dynamic area&#13;
+$$dynamicArea-&gt;finishDynamicArea();</template><template autoinsert="true" context="php" deleted="false" description="COption::GetOptionString()" enabled="true" name="bx::coptget">$$${optValue} = COption::GetOptionString("${module}","${OPTION_NAME}","");
+</template><template autoinsert="true" context="php" deleted="false" description="COption::SetOptionString();" enabled="true" name="bx::coptset">COption::SetOptionString("${module}", "${OPTION_NAME}", "${OPTION_VALUE}");
+</template><template autoinsert="true" context="php" deleted="false" description="\Bitrix\Main\Type\DateTime" enabled="true" name="bx::date">new \Bitrix\Main\Type\DateTime()</template><template autoinsert="true" context="php" deleted="false" description="$APPLICATION-&gt;GetCurPageParam();" enabled="true" name="bx::getcurpageparam">$$APPLICATION-&gt;GetCurPageParam("${param}=${param_value}",array("${delete_param1}","${delete_param2}"));
+</template><template autoinsert="true" context="php" deleted="false" description="$eventManager-&gt;addEventHandler(...) - регистрация обработчика события" enabled="true" name="bx::handler">$$eventManager = \Bitrix\Main\EventManager::getInstance();
 $$eventManager-&gt;addEventHandler('${module}', '${event_name}', array('${class_name}','${function_name}'));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="Highloadblock добавление записи" enabled="true" name="bx::hl.add">$$hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(${HL_ID})-&gt;fetch();&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="Highloadblock добавление записи" enabled="true" name="bx::hl.add">$$hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(${HL_ID})-&gt;fetch();&#13;
 $$entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($$hlblock);&#13;
 $$entity_data_class = $$entity-&gt;getDataClass();&#13;
 $$result = $$entity_data_class::add(array(&#13;
 	"${UF_FIELD}" =&gt; "${value}",&#13;
 ));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlockElement::GetByID" enabled="true" name="bx::ibegetbyid">$$element = CIBlockElement::GetByID($$ELEMENT_ID)-&gt;GetNext();
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlockElement::GetList" enabled="true" name="bx::ibegetlist">$$f = array("IBLOCK_ID"=&gt;$$IBLOCK_ID,"ACTIVE"=&gt;"Y","SECTION_GLOBAL_ACTIVE"=&gt;"Y");&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlockElement::GetByID" enabled="true" name="bx::ibegetbyid">$$element = CIBlockElement::GetByID($$ELEMENT_ID)-&gt;GetNext();
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlockElement::GetList" enabled="true" name="bx::ibegetlist">$$f = array("IBLOCK_ID"=&gt;$$IBLOCK_ID,"ACTIVE"=&gt;"Y","SECTION_GLOBAL_ACTIVE"=&gt;"Y");&#13;
 $$s = array("ID","NAME");&#13;
 $$rs = CIBlockElement::GetList(array("ID"=&gt;"ASC"),$$f,false,false,$$s);&#13;
 while($$o = $$rs-&gt;GetNextElement())&#13;
@@ -55,45 +53,42 @@ while($$o = $$rs-&gt;GetNextElement())&#13;
 	$$arItem = $$o-&gt;GetFields();&#13;
 	$$arItem["PROPERTIES"] = $$o-&gt;GetProperties();&#13;
 }
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlock::GetByID()" enabled="true" name="bx::ibgetbyid">$$ib = CIBlock::GetByID(${iblock_id})-&gt;Fetch();
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlock::GetList()" enabled="true" name="bx::ibgetlist">$$f = array("TYPE"=&gt;"${ib_type}","CODE"=&gt;"${ib_code}","ACTIVE"=&gt;"Y");&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlock::GetByID()" enabled="true" name="bx::ibgetbyid">$$ib = CIBlock::GetByID(${iblock_id})-&gt;Fetch();
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlock::GetList()" enabled="true" name="bx::ibgetlist">$$f = array("TYPE"=&gt;"${ib_type}","CODE"=&gt;"${ib_code}","ACTIVE"=&gt;"Y");&#13;
 $$rs = CIBlock::GetList(array("iblock_type"=&gt;"asc","name"=&gt;"asc"),$$f);&#13;
 while($$ib = $$rs-&gt;Fetch())&#13;
 {&#13;
 	${cursor}&#13;
 }
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlockProperty::GetList()" enabled="true" name="bx::ibpgetlist">$$f = array("IBLOCK_ID"=&gt;${IBLOCK_ID},"CODE"=&gt;"${PROPERTY_CODE}","PROPERTY_TYPE"=&gt;"${PROPERTY_TYPE}","ACTIVE"=&gt;"Y");&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlockProperty::GetList()" enabled="true" name="bx::ibpgetlist">$$f = array("IBLOCK_ID"=&gt;${IBLOCK_ID},"CODE"=&gt;"${PROPERTY_CODE}","PROPERTY_TYPE"=&gt;"${PROPERTY_TYPE}","ACTIVE"=&gt;"Y");&#13;
 $$rs = CIBlockProperty::GetList(array("SORT"=&gt;"ASC"), $$f);&#13;
 while ($$arProperty = $$rs-&gt;GetNext())&#13;
 {&#13;
 	${cursor}&#13;
 }
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlockSection::GetByID()" enabled="true" name="bx::ibsgetbyid">$$section = CIBlockSection::GetByID(${sid})-&gt;GetNext();
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CIBlockSection::GetList()" enabled="true" name="bx::ibsgetlist">$$f = array("IBLOCK_ID"=&gt;${IBLOCK_ID},"ACTIVE"=&gt;"Y","GLOBAL_ACTIVE"=&gt;"Y");&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlockSection::GetByID()" enabled="true" name="bx::ibsgetbyid">$$section = CIBlockSection::GetByID(${sid})-&gt;GetNext();
+</template><template autoinsert="true" context="php" deleted="false" description="CIBlockSection::GetList()" enabled="true" name="bx::ibsgetlist">$$f = array("IBLOCK_ID"=&gt;${IBLOCK_ID},"ACTIVE"=&gt;"Y","GLOBAL_ACTIVE"=&gt;"Y");&#13;
 $$s = array("ID","NAME","DEPTH_LEVEL","ACTIVE","UF_*");&#13;
 $$rs = CIBlockSection::GetList(array("ID"=&gt;"ASC"),$$f,false,$$s);&#13;
 while($$arSection = $$rs-&gt;GetNext())&#13;
 {&#13;
 	${cursor}&#13;
 }
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CFile::ResizeImageGet()" enabled="true" name="bx::imgresize">$$arPhotoFilter = array("name" =&gt; "sharpen", "precision" =&gt; 30);&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="CFile::ResizeImageGet()" enabled="true" name="bx::imgresize">$$arPhotoFilter = array("name" =&gt; "sharpen", "precision" =&gt; 30);&#13;
 $$arFileTmp = CFile::ResizeImageGet($$fid,array("width" =&gt; ${width}, "height" =&gt; ${height}),BX_RESIZE_IMAGE_PROPORTIONAL,true, $$arPhotoFilter);&#13;
 if(!empty($$arFileTmp["src"]))&#13;
 {&#13;
 	${cursor}&#13;
 }
-</template>
-<template autoinsert="true" context="php" deleted="false" description="php_interface include file" enabled="true" name="bx::incfile">$$incFile = __DIR__."/${filename}.php"; if(file_exists($$incFile)) require_once($$incFile);
-</template>
-<template autoinsert="true" context="php" deleted="false" description="\Bitrix\Main\Loader::includeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">\Bitrix\Main\Loader::includeModule("iblock${cursor}");</template>
-<template autoinsert="true" context="php" deleted="false" description="use \Bitrix\Main\Localization\Loc;" enabled="true" name="bx::loc">use \Bitrix\Main\Localization\Loc;</template>
-<template autoinsert="true" context="php" deleted="false" description="Склонение числительных" enabled="true" name="bx::pluralForm">$$pluralForm = function($$n, $$form1, $$form2, $$form5)&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="php_interface include file" enabled="true" name="bx::incfile">$$incFile = __DIR__."/${filename}.php"; if(file_exists($$incFile)) require_once($$incFile);
+</template><template autoinsert="true" context="php" deleted="false" description="\Bitrix\Main\Loader::includeModule(&quot;iblock&quot;);" enabled="true" name="bx::incmod">\Bitrix\Main\Loader::includeModule("iblock${cursor}");</template><template autoinsert="true" context="php" deleted="false" description="use \Bitrix\Main\Localization\Loc;" enabled="true" name="bx::loc">use \Bitrix\Main\Localization\Loc;</template><template autoinsert="true" context="php" deleted="false" description="D7 ORM ReferenceField" enabled="true" name="bx::orm.ref">new \Bitrix\Main\Entity\ReferenceField('NAME', \Bitrix\Main\UserTable::class, ['=this.uid' =&gt; 'ref.ID'])</template><template autoinsert="true" context="php" deleted="false" description="Simple Bitrix page" enabled="true" name="bx::page">require($$_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");&#13;
+$$APPLICATION-&gt;SetPageProperty("title", "Заголовок браузера");&#13;
+$$APPLICATION-&gt;SetPageProperty("keywords", "Ключевые слова");&#13;
+$$APPLICATION-&gt;SetPageProperty("description", "Описание страницы");&#13;
+$$APPLICATION-&gt;SetTitle("Заголовок страницы H1");&#13;
+&#13;
+require($$_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+</template><template autoinsert="true" context="php" deleted="false" description="Склонение числительных" enabled="true" name="bx::pluralForm">$$pluralForm = function($$n, $$form1, $$form2, $$form5)&#13;
 {&#13;
 	$$n = abs($$n) % 100;&#13;
 	$$n1 = $$n % 10;&#13;
@@ -103,12 +98,9 @@ if(!empty($$arFileTmp["src"]))&#13;
 	return $$form5;&#13;
 };&#13;
 // $$pluralForm(10,"товар","товара","товаров");
-</template>
-<template autoinsert="true" context="php" deleted="false" description="SITE_TEMPLATE_PATH" enabled="true" name="bx::SITE_TEMPLATE_PATH">&lt;?=SITE_TEMPLATE_PATH?&gt;
-</template>
-<template autoinsert="true" context="php" deleted="false" description="SetResultCacheKeys()" enabled="true" name="bx::tpl.cachekeys">$$this-&gt;__component-&gt;SetResultCacheKeys(array(${cursor}));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="news.list template" enabled="true" name="bx::tpl.newslist">if ($$arResult["ITEMS"])&#13;
+</template><template autoinsert="true" context="php" deleted="false" description="SITE_TEMPLATE_PATH" enabled="true" name="bx::SITE_TEMPLATE_PATH">&lt;?=SITE_TEMPLATE_PATH?&gt;
+</template><template autoinsert="true" context="php" deleted="false" description="SetResultCacheKeys()" enabled="true" name="bx::tpl.cachekeys">$$this-&gt;__component-&gt;SetResultCacheKeys(array(${cursor}));
+</template><template autoinsert="true" context="php" deleted="false" description="news.list template" enabled="true" name="bx::tpl.newslist">if ($$arResult["ITEMS"])&#13;
 {&#13;
 	if($$arParams["DISPLAY_TOP_PAGER"]) echo $$arResult["NAV_STRING"];&#13;
 	foreach ($$arResult["ITEMS"] as $$arItem)&#13;
@@ -124,32 +116,127 @@ if(!empty($$arFileTmp["src"]))&#13;
 	}&#13;
 	if($$arParams["DISPLAY_BOTTOM_PAGER"]) echo $$arResult["NAV_STRING"];&#13;
 }&#13;
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CUtil::translit()" enabled="true" name="bx::translit">$$code = CUtil::translit($$str, "ru", array("max_len"=&gt;100,"change_case"=&gt;"L","replace_space"=&gt;"-","replace_other"=&gt;"-","delete_repeat_replace"=&gt;true));
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CUser::GetUserGroupArray() - get groups of current user" enabled="true" name="bx::usergroups">$$uGroups = $$GLOBALS["USER"]-&gt;GetUserGroupArray();
-</template>
-<template autoinsert="true" context="php" deleted="false" description="CUser::GetUserGroup($userID) - get user groups by user ID" enabled="true" name="bx::usergroups_by_id">$$uGroups = CUser::GetUserGroup(${userID});
-</template>
+</template><template autoinsert="true" context="php" deleted="false" description="CUtil::translit()" enabled="true" name="bx::translit">$$code = CUtil::translit($$str, "ru", array("max_len"=&gt;100,"change_case"=&gt;"L","replace_space"=&gt;"-","replace_other"=&gt;"-","delete_repeat_replace"=&gt;true));
+</template><template autoinsert="true" context="php" deleted="false" description="CUser::GetUserGroupArray() - get groups of current user" enabled="true" name="bx::usergroups">$$uGroups = $$GLOBALS["USER"]-&gt;GetUserGroupArray();
+</template><template autoinsert="true" context="php" deleted="false" description="CUser::GetUserGroup($userID) - get user groups by user ID" enabled="true" name="bx::usergroups_by_id">$$uGroups = CUser::GetUserGroup(${userID});
+</template><template autoinsert="true" context="php" deleted="false" description="bxip" enabled="true" name="bxip">if($$_SERVER['REMOTE_ADDR'] === '185.101.139.42')
+{
+	ltf(${cursor},true);
+}</template><template autoinsert="true" context="php" deleted="false" description="ip for el gorod" enabled="true" name="bxipEG">if($$_SERVER['REMOTE_ADDR'] === '37.194.214.90')
+{
+	ltf(${cursor},true);
+}</template><template autoinsert="false" context="php-global-members" deleted="false" description="class statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.class" name="class">class ${class_name} {
+	function ${function_name}() {
+		${cursor};
+	}
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="Clone an object" enabled="true" id="org.eclipse.php.ui.editor.templates.php.cln" name="cln">${dollar}${new_obj} = clone ${dollar}${variable};
+${cursor}</template><template autoinsert="false" context="php-global-members" deleted="false" description="lambda function statement (closure)" enabled="true" id="org.eclipse.php.ui.editor.templates.php.closure" name="closure">function (${parameters}) use (${lexical_variables}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="class statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.cls" name="cls">class ${class_name} {
+	function ${function_name}() {
+		${cursor};
+	}
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="echo a string" enabled="true" id="org.eclipse.php.ui.editor.templates.php.echo" name="eco">echo("${}");
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="elseif statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.elif" name="elif">elseif (${condition}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="else statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.else" name="els">else {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="arrow function statement (short closure)" enabled="true" id="org.eclipse.php.ui.editor.templates.php.fn" name="fn">fn (${parameters}) =&gt; ${cursor}</template><template autoinsert="false" context="php-type-members" deleted="false" description="function statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.fnc" name="fnc">function ${function_name}(${dollar}${param}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="function statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.fnc1" name="fnc">function ${function_name}(${dollar}${param}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="for statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.for" name="for">for (${dollar}${index} = 0; ${dollar}${index} &lt; ${number_variable}; ${dollar}${index}++) {
+	${line_selection}${cursor}
+}</template><template autoinsert="false" context="php-statements" deleted="false" description="foreach statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.foreach" name="fore">foreach (${dollar}${array_expression} as ${dollar}${value}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="foreach with key statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.foreachkey" name="forek">foreach (${dollar}${array_expression} as ${dollar}${key} =&gt; ${dollar}${value}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-type-members" deleted="false" description="function statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.function" name="function">function ${function_name}(${dollar}${param}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="function statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.function1" name="function">function ${function_name}(${dollar}${param}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="if statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.if" name="if">if (${condition}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="instanceof statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.instanceof" name="inst">if (${dollar}${variable} instanceof ${class}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="iterates a directory" enabled="true" id="org.eclipse.php.ui.editor.templates.php.itdir" name="itdir">${dollar}${dirh} = opendir(${dirname});
+if (${dollar}${dirh}) {
+	while (${dollar}${dir_element} = readdir(${dollar}${dirh})) {
+		${cursor};
+	}
+	unset(${dollar}${dir_element});
+	closedir(${dollar}${dirh});
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="iterates an array" enabled="true" id="org.eclipse.php.ui.editor.templates.php.arrayIterator" name="iter">for (${dollar}${number_variable} = 0 ; ${dollar}${number_variable} &lt; count(${dollar}${array_variable}) ; ${dollar}${number_variable}++) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="lambda function statement (closure)" enabled="true" id="org.eclipse.php.ui.editor.templates.php.lambda" name="lambda">function (${parameters}) use (${lexical_variables}) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="mysqli_fetch_array() loop" enabled="true" id="org.eclipse.php.ui.editor.templates.php.mySql.fa" name="my_fa">while (${dollar}${row} = mysqli_fetch_array(${dollar}${query})) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="mysqli_fetch_object() loop" enabled="true" id="org.eclipse.php.ui.editor.templates.php.mySql.fo" name="my_fo">while (${dollar}${row} = mysqli_fetch_object(${dollar}${query})) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="mysqli_fetch_row() loop" enabled="true" id="org.eclipse.php.ui.editor.templates.php.mySql.fr" name="my_fr">while (${dollar}${row} = mysqli_fetch_row(${dollar}${query})) {
+	${cursor};
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="Trap code output" enabled="true" id="org.eclipse.php.ui.editor.templates.php.my_gc" name="my_gc">ob_start();
+	
+${cursor};
 
-<template autoinsert="true" context="php" deleted="false" description="Insert component bitrix:breadcrumb" enabled="true" name="bx::comp.breadcrumb">$$APPLICATION-&gt;IncludeComponent("bitrix:breadcrumb", ".default", array("START_FROM" =&gt; "0","PATH" =&gt; "","SITE_ID" =&gt; "-"),false);
-</template>
-
-<template autoinsert="true" context="php" deleted="false" description="Insert component bitrix:main.include :: include file by path" enabled="true" name="bx::comp.main.include by filepath">$$APPLICATION-&gt;IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" =&gt; "file", "PATH" =&gt; SITE_TEMPLATE_PATH."/includes/filename.php"), false);
-</template>
-<template autoinsert="true" context="php" deleted="false" description="Simple Bitrix page" enabled="true" name="bx::page">require($$_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");&#13;
-$$APPLICATION-&gt;SetPageProperty("title", "Заголовок браузера");&#13;
-$$APPLICATION-&gt;SetPageProperty("keywords", "Ключевые слова");&#13;
-$$APPLICATION-&gt;SetPageProperty("description", "Описание страницы");&#13;
-$$APPLICATION-&gt;SetTitle("Заголовок страницы H1");&#13;
-&#13;
-require($$_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
-</template>
-<template autoinsert="true" context="php" deleted="false" description="Composite site dynamic area" enabled="true" name="bx::compositeDynamicArea">$$dynamicArea = new \Bitrix\Main\Page\FrameStatic("${dynamic_block_id}");&#13;
-$$dynamicArea-&gt;setStub("");&#13;
-$$dynamicArea-&gt;setAnimation(true);&#13;
-// $$dynamicArea-&gt;setContainerID("${dynamic_block_id}");&#13;
-$$dynamicArea-&gt;startDynamicArea();&#13;
-// code of dynamic area&#13;
-$$dynamicArea-&gt;finishDynamicArea();</template>
-</templates>
+${dollar}${contents} = ob_get_contents();
+ob_end_clean();
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="namespace statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.ns" name="ns">namespace ${name};</template><template autoinsert="false" context="php-type-method-statements" deleted="false" description="Call parent's clone" enabled="true" id="org.eclipse.php.ui.editor.templates.php.pclon" name="pclon">parent::__clone();
+</template><template autoinsert="false" context="php-type-method-statements" deleted="false" description="Call parent constructor" enabled="true" id="org.eclipse.php.ui.editor.templates.php.pcon" name="pcon">parent::__construct();
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="print an expression" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print" name="pr">print ${};
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="prints the current class name" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print.className" name="prc">print("${class_container}");
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="prints the current function name" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print.functionName" name="prf">print("${function_container}");
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="print with new line" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print.newline" name="prln">print ${}."\n";
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="print a string" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print.string" name="prs">print "${}";
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="print a value" enabled="true" id="org.eclipse.php.ui.editor.templates.php.print.variable" name="prv">print("\${dollar}${variable} = ". ${dollar}${variable});
+${cursor}</template><template autoinsert="false" context="php-statements" deleted="false" description="switch statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.switch" name="swi">switch (${dollar}${variable}) {
+	case ${value}:
+	${cursor};
+	break;
+	
+	default:
+		;
+	break;
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="trait statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.trait" name="trait">trait ${trait_name} {
+	function ${function_name}() {
+		${cursor};
+	}
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="trait statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.trt" name="trt">trait ${trait_name} {
+	function ${function_name}() {
+		${cursor};
+	}
+}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="try catch block" enabled="true" id="org.eclipse.php.ui.editor.templates.php.try" name="try">try {
+	${cursor}
+} catch (${Exception} ${dollar}e) {
+}
+</template><template autoinsert="false" context="php-global-members" deleted="false" description="use statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.use" name="use">use ${namespace} as ${alias};</template><template autoinsert="false" context="php-class-members" deleted="false" description="use trait statement" enabled="true" id="org.eclipse.php.ui.editor.templates.php.usetrait" name="usetrait">use ${trait_name1}, ${trait_name2} {
+		${trait_name1}::${function_name1} insteadof ${trait_name2};
+		${trait_name1}::${function_name2} as ${function_name3};
+	}
+</template><template autoinsert="false" context="php-statements" deleted="false" description="while loop" enabled="true" id="org.eclipse.php.ui.editor.templates.php.while" name="while">while (${condition}) {
+	${cursor};
+}
+</template></templates>
